@@ -1,0 +1,731 @@
+\section{Fourieranalyse periodischer kontinuierlicher Signale}
+%\ifx\allfiles\undefined
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.6\textwidth}
+        \centering
+        \includegraphics[scale=0.4]{Bilder/Bilder_02/harmonische.png}
+        \caption{Harmonische Signale}
+        \label{fig:har_sig}
+    \end{minipage}
+    \hspace{0.6cm}
+    \begin{minipage}{.35\textwidth}
+    \textbf{Merkmale}:
+        \begin{itemize}
+            \item 
+            Amplitude: \, A
+            \item
+            Periodendauer: \,T
+            \item
+            Kreisfrequenz: \, $\omega=\dfrac{2\pi}{T}$
+            \item
+            Frequenz: \, $f=\dfrac{\omega}{2\pi}=\dfrac{1}{T}$
+        \end{itemize}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.6\textwidth}
+        \centering
+        \includegraphics[scale=0.45]{Bilder/Bilder_02/periodische.png}
+        \caption{Periodische Signale}
+        \label{fig:Period_sig}
+    \end{minipage}
+    \hspace{0.6cm}
+    \begin{minipage}{.35\textwidth}
+        \textbf{Merkmale}:
+            \begin{itemize}
+                \item 
+                Periodisch: \, $x(t)=x(t+T)$
+                \item
+                Periodendauer:\, $T_1$
+                \item
+                Grundfrequenz:\, $f_1=\dfrac{1}{T_1}$
+                \item
+                Grundkreisfrequenz:\, $\omega_1=2\pi f_1=\dfrac{2\pi}{T_1}$
+            \end{itemize}
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.45\textwidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.4]{Bilder/Bilder_02/Überlagerung Harmonische_01.png}
+            \nonumber
+        \end{figure}
+        \begin{equation}
+        \begin{split}
+               u_{s u m}(t)=&\cos \left(\omega_{0} t\right)+\frac{1}{3} \cos \left(3 \omega_{0} t+\pi\right) \\+&\frac{1}{5} \cos \left(5 \omega_{0} t\right)
+        \end{split}
+             \nonumber
+        \end{equation}
+    \end{minipage}
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.4]{Bilder/Bilder_02/Überlagerung Harmonische_02.png}
+            \nonumber
+        \end{figure}
+        \begin{equation}
+        \begin{split}
+            u_{s u m}(t)=&\cos \left(\omega_{0} t\right)+\frac{1}{3} \cos \left(3 \omega_{0} t\right) \\ +&\frac{1}{5} \cos \left(5 \omega_{0} t\right)
+        \end{split}
+        \nonumber
+        \end{equation}
+    \end{minipage}
+        \caption{Überlagerung mehrerer Harmonischen}
+\end{figure}
+
+\textbf{Spektrum und Fourier-Reihe}:\\
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.5\textwidth}
+        \centering
+        \includegraphics[scale=0.6]{Bilder/Bilder_02/Lichtsspektren.png}
+        \nonumber
+    \end{minipage}
+    \hspace{0.6cm}
+    \begin{minipage}{.4\textwidth}
+        \textit{\textbf{Spektrum:} Das Muster des monochromatischen Lichts, das in der Reihenfolge der Wellenlänge (oder Frequenz) gestreut wurde, wird als optisches Spektrum bezeichnet.}
+    \end{minipage}
+    \caption{Spektrum}
+    \label{fig:Spektrum}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfigbottomskip=10pt
+    \subfigcapskip=3pt
+    \subfigure[Fourier:\, 1768-1830]{
+        \includegraphics[scale=0.4]{Bilder/Bilder_02/Joseph Fourier.png}
+    }
+    \subfigure[Fourier-Reihe]{
+        \includegraphics[scale=0.8]{Bilder/Bilder_02/FR.png}
+        \nonumber
+    }
+    \caption{Fourier und FR}
+    \label{fig:Fourier und FR}
+\end{figure}
+
+
+\subsection{\textbf{Fouirerreihe}}
+\subsubsection{\textbf{Orthogonale Reihenentwicklung}}
+Periodisches Signal $x(t)$ mit Periodendauer soll durch einen Satz von Basisfunktionen approximiert werden.\\
+\textbf{Basisfunktion:} $g_0^{\textcolor{red}{(t)}},g_1^{\textcolor{red}{(t)}},g_2^{\textcolor{red}{(t)}},\cdots,g_k^{\textcolor{red}{(t)}},\cdots$
+
+Die Approximation von $x(t)$:\\
+\begin{equation}
+    x_{\text {approx }}(t)=\sum_{k=0}^{\infty} a_{k} g_{k}(t) \quad \mbox {$a_k$-Koeffizient der Reihe}
+\end{equation}
+
+Kriterien zur Bestimmung der Koeffizienten $a_k$: $\rightarrow$ \textbf{bleibend Fehlerquadrat.}
+
+\begin{equation}
+\begin{aligned}
+    Q F &=\int_{a}^{b}\left(x(t)-x_{\text {approx }}(t)\right)^{2} d t \leadsto \min \\
+       &=\int_{a}^{b}\left(x(t)-\sum_{l=0}^{\infty} a_{l} g_{l}(t)\right)^{2} d t \leadsto \min
+\end{aligned}
+\end{equation}
+Damit \textbf{QF} minimal wird, muss die Folgende Ableitung gelten:\\
+\begin{equation}
+\frac{\partial Q F}{\partial a_{k}}=0, \quad \mbox{\textit{\textbf{für}}} \; k=0,1,2, \ldots
+\end{equation}
+
+Die Differentiation:\\
+\begin{equation}
+\begin{split}
+    \frac{\partial Q F}{\partial a_{k}}=\int_{a}^{b} 2\left[x(t)-\sum_{l=0}^{\infty} a_{l} g_{l}(t)\right]\left(-g_{k}\right) d t=0\\
+    \int_{a}^{b}\left[x(t) g_{k}(t)-\sum_{l=0}^{\infty} a_{l} g_{l}(t) g_{k}(t)\right] \cdot d t=0
+\end{split}
+\end{equation}
+
+\fbox{
+    \parbox{1\linewidth}{
+    Für jeden k, k=0,1,2,\ldots:
+    \begin{center}
+       \begin{equation}
+       \setlength\abovedisplayskip{1pt} % shrink space
+       \setlength\belowdisplayskip{1pt}
+       \int_{a}^{b} x(t) \cdot g_{k}(t) \cdot d t=\sum_{l=0}^{\infty} \int_{a}^{b} a_{l} g_{l}(t) g_{k}(t) d t \eqno(*)
+       \nonumber
+       \end{equation}
+    \end{center}
+    }
+}
+
+Sonderfall:\\
+Wenn die Basisfunktion $g_0^{\textcolor{red}{(t)}},g_1^{\textcolor{red}{(t)}},\cdots$ zueinander orthogonal sind, d.h.:\\
+\begin{equation}
+    \int_{a}^{b} g_{k}(t) \cdot g_{l}(t) d t= \begin{cases}0 & \text { für } k \neq l \\ K_{l} & \text { für } k=l\end{cases}
+\end{equation}
+
+Die Gleichung (*) vereinfacht sich zu:\\
+\begin{equation}
+    \int_{a}^{b} x(t) g_{k}(t) d t=a_{k} \cdot \int_{a}^{b} g_{k}(t) \cdot g_{k}(t) d t, \quad k=0,1,2, \cdots
+\end{equation}
+
+\begin{equation}
+    \textcolor{blue}{\Rightarrow} a_{k}=\frac{\int_{a}^{b} x(t) g_{k}(t) d t}{\int_{a}^{b} g_{k}(t) \cdot g_{k}(t) d t}
+\end{equation}
+
+
+\subsubsection{\textbf{Reelle Fourierreihe (trigonometrische Fourierreihe)}}
+Basisfunktion:\par
+\begin{center}
+    \begin{tabular}{c|c|c|c|c|c|c}
+    \hline
+    \centering
+    1 & $\cos(\omega_1 t)$ & $\sin(\omega_1 t)$ & $\cos(2 \omega_1 t)$ & $\sin(2 \omega_1 t)$ & $\cos(3 \omega_1 t)$ & $\cdots$\\
+    \hline
+    $g_0$ & $g_{1c}$ & $g_{1s}$ & $g_{2c}$ & $g_{2s}$ & $g_{3c}$ & $\cdots$ \\
+    $a_0$ & $a_1$ & $b_1$ & $a_2$ & $b_2$ & $a_3$ & $\cdots$ \\
+    \hline
+    \end{tabular}
+\end{center}
+
+
+Es lässt sich prüfen, dass sie zueinander orthogonal sind.\\
+Für ein periodischer Verlauf \,$x(t)$, Periodendauer T, \,Grundfrequenz $f_1=\dfrac{1}{T}$, Grundkreisfrequenz \, $\omega_1=\dfrac{2\pi}{T}$.
+\begin{equation}
+\begin{aligned}
+    x(t)=\underbrace{a_{0}}_{\textcolor{blue}{Mittelwert}} &+\underbrace{a_{1} \cdot \cos \omega_{1} t+b_{1} \cdot \sin \omega_{1} t }_{\textcolor{red}{Grundschwingung:\, 1.\, Harmonische}}\\
+               &+\underbrace{a_{2} \cdot \cos 2\omega_{1} t+b_{2} \cdot \sin 2\omega_{1} t }_{\textcolor{green}{Grundschwingung: \,2.\, Harmonische}}\\
+               &+\underbrace{a_{3} \cdot \cos 3\omega_{1} t+b_{3} \cdot \sin 3\omega_{1} t }_{\textcolor{purple}{Grundschwingung:\, 3.\, Harmonische}}\\
+               &+\cdots
+\end{aligned}
+\nonumber
+\end{equation}
+
+Die obige Entwicklung is als folgende Gleichung zusammenzufassen:\\
+\begin{equation}
+\begin{aligned}
+    &x(t)=a_{0}+\sum_{k=1}^{\infty}\left(a_{k} \cdot \cos k \omega_{1} t+b_{k} \cdot \sin k \omega_{1} t\right) \\
+    &a_{0}=\underbrace{\frac{\int_{T} x(t) \cdot g_{0}(t) d t}{\int_{T} g_{0}(t) \cdot g_{0}(t) d t}}_{\textcolor{blue}{T}}=\frac{1}{T} \int_{T} x(t) d t \\
+    &a_{k}=\frac{\int_{T} x(t) g_{k c}(t) d t}{\int_{T} g_{k c}(t) \cdot g_{k c}(t) d t}=\frac{\int_{T} x(t) \cdot \cos k \omega_{1} t d t}{\int_{T}\left[\cos \left(k \omega_{1} t\right)\right]^{2} \cdot d t}=\frac{2}{T} \int_{T} x(t) \cdot \cos k \omega_{1} t d t \\
+    &b_{k}=\frac{\int_{T} x(t) g_{k s}(t) d t}{\int_{T} g_{k s}(t) \cdot g_{k s}(t) d t}=\frac{\int_{T} x(t) \cdot \sin k \omega_{1} t d t}{\int_{T}\left[\sin \left(k \omega_{1} t\right)\right]^{2} d t}=\frac{2}{T} \int_{T} x(t) \cdot \sin k \omega_{1} t d t
+    \end{aligned}
+   \label{con:Gl zur Berechnung FR}
+\end{equation}
+
+Zusammenfassung der trigonometrischer Fourier-Entwicklung und deren Variaten:\\
+\begin{equation}
+\begin{aligned}
+    x(t) &=a_{0}+\sum_{k=1}^{\infty}\left(a_{k} \cdot \cos k \omega_{1} t+b_{k} \sin k \omega_{1} t\right) \\
+    &=a_{0}+\sum_{k=1}^{\infty} c_{k} \cdot \cos \left(k \omega_{1} t+\varphi_{k}\right) \\
+    &=a_{0}+\sum_{k=1}^{\infty} d_{k} \cdot \sin \left(k \omega_{n} t+\psi_{k}\right) \\
+    c_{k} &=d_{k}=\sqrt{a_{k}^{2}+b_{k}^{2}}\\
+    \varphi_{k} & =a \tan 2\left(-b_{k} , a_{k}\right) \\
+    \psi_{k}&=\operatorname{atan} 2\left(a_{k}, b_{k}\right)\\
+\end{aligned}
+\end{equation}
+
+Ergänzung: Der Wertebereich der Tangensfunktion:\\
+\begin{figure}
+    \centering
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \includegraphics{Bilder/Bilder_02/tangensfunktion.png}
+        \nonumber
+    \end{minipage}
+    \hspace{1cm}
+    \begin{minipage}{.45\linewidth}
+        $\tan \alpha=\dfrac{y}{x}$\\
+        $\alpha = \operatorname{atan2}(y,x)\in (-\pi,\pi)$
+    \end{minipage}
+    \caption{Tangensfunktion und Wertbereich}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{minipage}{.7\linewidth}
+        \centering
+        \includegraphics[scale=0.3]{Bilder/Bilder_02/Darstellung in beiden Bereichen.png}
+        \caption{Darstellung eines periodischen Signals im Zeit- sowie Frequenzbereich}
+    \end{minipage}
+    \begin{minipage}{.25\linewidth}
+        Ein periodisches Zeitsignal $x(t)$ besitzt \textbf{nur die Grundfrequenz und deren Vielfache.} Ein Beispiel siehe unten:
+    \end{minipage}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.55\linewidth}
+        \centering
+        \includegraphics[scale=0.4]{Bilder/Bilder_02/Rechteck-Impuls.png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}{0.4\linewidth}
+        \begin{itemize}
+            \item[-]
+            $T=1s$
+            \item[-]
+            $f_1=\dfrac{1}{T}=1Hz$
+            \item[-]
+            $x(t)$ kann nur die diskreten Frequenzen $1Hz, 2Hz, 3Hz \ldots$ besitzen.
+        \end{itemize}
+    \end{minipage}
+\end{figure}
+
+Fourierreihe für gerade/\, ungerade periodische Signale:\\
+\begin{itemize}
+    \item 
+    \textit{gerade Signale $x(t)=x(-t)$:}\\
+    \begin{equation}
+        \begin{aligned}
+        a_0=&\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)dt=\frac{2}{T}\int_{0}^{\frac{T}{2}}x(t)dt\\
+        a_{k}=&\frac{2}{T} \int_{-T / 2}^{T / 2} x(t) \cos (k \omega_{1} t) d t
+        =\frac{2}{T} \cdot 2 \cdot \int_{0}^{T / 2} \underbrace{x(t) \cdot \cos( k \omega_{1} t)}_{gerade}dt\\
+        b_{k}=&\frac{2}{T} \int_{-T / 2}^{T / 2} \underbrace{x(t) \cdot \sin( k \omega_{1} t)}_{ungerade } d t=0
+        \end{aligned}
+    \end{equation}
+    \item
+        \textit{ungerade Signale $x(t)=-x(-t)$:}\\
+            \begin{equation}
+        \begin{aligned}
+        a_{0}=&\frac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)dt=0\\
+        a_{k}=&\frac{2}{T} \int_{-T / 2}^{T / 2} x(t) \cos (k \omega_{1} t) d t \\
+        b_{k}=&\frac{2}{T} \int_{T} x(t) \cdot \sin (k \omega_{1} t )d t=\frac{2}{T} \cdot 2 \cdot \int_{0}^{T / 2} x(t) \sin (k \omega_{1} t )d t
+        \end{aligned}
+\end{equation}
+\end{itemize}
+
+\textbf{Beispiel: gerade Rechteckimpuls:}\\
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \includegraphics[scale=0.24]{Bilder/Bilder_02/gerade_bsp.png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}{.45\linewidth}
+        \begin{itemize}
+            \item
+            Kraftverlauf $x(t)$ ist periodisch mit Periodendauer\, T
+            \item
+            Für den Kraftverlauf:
+            \begin{itemize}
+                \item [-]
+                Periode \,T
+                \item [-]
+                Grundkreisfrequenz\, $\omega_1=\frac{2\pi}{T}$
+                \item [-]
+                nur diskrete Frequenz vorhanden $k\omega_1$
+            \end{itemize}
+            \item
+            \textbf{Gesucht:\,Fourierreihe}
+        \end{itemize}
+    \end{minipage}
+\end{figure}
+
+Der gezeigte Rechteckimpuls ist in funktionaler Form umzuschreiben:\\
+\begin{equation}
+    x(t)= \begin{cases}0 & t \in(\dfrac{-T}{2},\dfrac{-\tau}{2}) \\ 
+                       A & t \in(\dfrac{-\tau}{2},\dfrac{\tau}{2}) \\ 
+                       0 & t \in(\dfrac{\tau}{2},\dfrac{T}{2})\end{cases}
+    \nonumber
+\end{equation}
+
+Nach dem Gleichungssystem \ref{con:Gl zur Berechnung FR}:\\
+\begin{equation}
+\begin{aligned}
+    a_{0} &=\frac{1}{T} \int_{-T / 2}^{T / 2} x(t) d t=\frac{1}{T} \int_{-\tau / 2}^{\tau / 2} A \cdot d t=\frac{A \tau}{T} \\
+    a_{k} &=\frac{2}{T} \int_{-T / 2}^{T / 2} x(t) \cdot \cos (k \omega \omega_{1} t) d t=\frac{2}{T} \int_{-\tau / 2}^{\pi / 2} A \cdot \cos (k \omega_{1} t) d t \\
+    &=\left.\frac{2 A}{T} \cdot \frac{\sin (k \omega_{1} t)}{k \omega_{1}}\right|_{-\tau / 2} ^{\tau / 2}=\frac{2 A \textcolor{blue}{\tau}}{T} \frac{{\textcolor {red}{\xout{2}}} \sin (\frac{k \omega_{1} \tau}{2})}{\frac{k \omega_{1} \textcolor{blue}{\tau}}{\textcolor{red}{2} }} \\
+    &=\frac{2 A \tau}{T} \cdot \operatorname{si}\left(\frac{k \omega_{1} \tau}{2}\right) \\
+    b_{k} &=\frac{2}{T} \int_{-T / 2}^{T / 2} x(t) \cdot \sin (k \omega_{1} t )d t=0, \text { weil } x(t) \text { gerade ist. }
+    \end{aligned}
+\end{equation}
+
+Daraus ergibt sich die Fourierreihe:\\
+\begin{equation}
+    x(t)=a_{0}+\sum_{k=1}^{\infty} \underbrace{\frac{2 A \tau}{T} \operatorname{si}\left(\frac{k \omega_{1} \tau}{2}\right)}_{\textcolor{blue}{A_k}} \cdot \cos \left(k \omega_{1} t\right)
+    \nonumber
+\end{equation}
+Da $\cos(\alpha \pm \pi)=-\cos \alpha$:\\
+\begin{equation}
+    A_{k} \cdot \cos \left(k \omega_{1} t\right)= \begin{cases}A_{k} \cdot \cos \left(k \omega_{1} t\right) & A_{k} \geqslant 0 \\ \left|A_{k}\right| \cdot \cos \left(k \omega_{1} t+\pi\right) & A_{k}<0\end{cases}
+\end{equation}
+
+Amplitudenspektrum:\\
+\begin{equation}
+    a_0, \quad A_{k}=\frac{2 A \tau}{T} \cdot \operatorname{si}\left(\frac{k \omega_{1} \tau}{2}\right) \text {, an Frequenzstelle}\, k \omega_{1}
+    \nonumber
+\end{equation}
+
+
+Betragsspektrum:\\
+\begin{equation}
+    x(t)=\frac{A \tau}{T}+\sum_{k=1}^{\infty}\left|\frac{2 A \tau}{T} \operatorname{si}\left(\frac{k \omega_{1} \tau}{2}\right)\right| \cdot \cos \left(k \omega_{1} t+\varphi_{k}\right)
+\end{equation}
+
+Phasenspektrum:\\
+\begin{equation}
+    \varphi_k=\left\{
+    \begin{array}{cl}
+    0, &  \ \dfrac{2nT}{\tau}\leqslant k \leqslant \dfrac{(2n+1)T}{\tau} \\
+    \pi,  &  \ \dfrac{(2n+1)T}{\tau} \leqslant k \leqslant \dfrac{(2n+2)T}{\tau} \\
+    \end{array} \right.
+\end{equation}
+
+Grafische Darstellung des Amplituden- sowie Phasenspektrums:\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.8]{Bilder/Bilder_02/Amp_Pha_grafisch.png}
+    \caption{Grafische Darstellung des Amplituden- sowie Phasenspektrums}
+    \label{fig:amp_pha_grafisch}
+\end{figure}
+
+Fourierreihe für periodisches Signal:
+\begin{center}
+    $x(t)=x(t+T)$\\
+\end{center}
+
+Grundkreisfrequenz:
+\begin{center}
+    $\omega_1=\dfrac{2\pi}{T}$\\
+\end{center}
+
+Fourierreihe:
+    \begin{equation}
+        \begin{aligned}
+        x_{(t)} &=a_{0}+\sum_{k=1}^{\infty}\left(a_{k} \cos k \omega_{1} t+b_{k} \sin k \omega_{1} t\right) \\
+        &=a_{0}+\sum_{k=1}^{\infty} A_{k} \cos \left(k \omega_{1} t+\varphi_{k}\right)
+        \end{aligned}
+\end{equation}
+Damit:
+\begin{equation}
+    \begin{aligned}
+        A_k&=A(k\omega_1)\ldots Amplitudenspektrum\\
+        \varphi_{k}&=\varphi(k\omega_1)\ldots Phasenspektrum
+    \end{aligned}
+\end{equation}
+    
+
+    
+
+
+\subsubsection{\textbf{Komplexe Fourierreihe}}
+\fbox{
+    \parbox{.95\textwidth}{
+        \hl{Eulersche Formel:}
+        \begin{equation}
+            \begin{aligned}
+                \cos \alpha&=\dfrac{1}{2}(e^{j \alpha}+e^{-j \alpha})\\
+                \sin \alpha&=\dfrac{1}{2j}(e^{j \alpha}-e^{-j \alpha})\\
+                           &=-\dfrac{j}{2}(e^{j \alpha}-e^{-j \alpha})
+            \end{aligned}
+            \label{con:Eulersche Formel}
+        \end{equation}
+    }
+}
+Einsetzen der Gleichungen \ref{con:Eulersche Formel} in die reelle Fourierreihe:\\
+\begin{equation}
+\begin{aligned}
+    x(t) &=a_{0}+\sum_{k=1}^{\infty} a_{k} \cdot \frac{1}{2}\left(e^{j k \omega_{1} t}+e^{-j k \omega_{1} t}\right)-\sum_{k=1}^{\infty} b_{k} \cdot \frac{j}{2}\left(e^{j k \omega_{1} t}-e^{-j k \omega_{1} t}\right) \\
+         &=a_{0}+\sum_{k=1}^{\infty}\left(\frac{a_{k}-j b_{k}}{2} e^{j k \omega_{1} t}\right)+\sum_{k=1}^{\infty} \frac{a_{k}+j b_{k}}{2} e^{-j k \omega_{1} t} \\
+         &=\underbrace{a_{0}}_{\textcolor{blue}{C_0 \cdot e^{j_0}}} +\sum_{k=1}^{\infty} \underbrace{\frac{a_{k}-j b_{k}}{2}}_{\textcolor{blue}{C_k} } \cdot e^{j k \omega_{1} t}+\sum_{k=-1}^{-\infty} \underbrace{\frac{a_{-k}+j b_{-k}}{2} }_{\textcolor{blue}{C_{-k}} }e^{j k \omega_{1} t}
+\end{aligned}
+\end{equation}
+
+\begin{equation}
+    \begin{aligned}
+    &a_{k}=\frac{2}{T} \int_{T} x(t) \cdot \cos \left(k \omega_{1} t\right) d t \, \Rightarrow \, a_{-k}=a_{k} \\
+    &b_{k}=\frac{2}{T} \int_{T} x(t) \cdot \sin \left(k \omega_{1} t\right) d t \, \Rightarrow \, b_{-k}=-b_{k}
+    \end{aligned}
+    \nonumber
+\end{equation}
+
+Dann gilt:\\
+\begin{equation}
+    \begin{aligned}
+        x(t)&=x(t)=\sum_{k=-\infty}^{\infty}c_k \cdot e^{jk \omega_1 t}\\
+        c_{0} &=a_{0}=\frac{1}{T} \int_{T} x(t) d t \\
+        c_{k} &=\frac{1}{2}\left[\frac{2}{T}\left(\int_{T} x(t) \cdot \cos (k \omega_{1} t) d t-j \cdot \int_{T} x(t) \cdot \sin (k \omega_{1} t) d t\right)\right] \\
+        &=\frac{1}{T} \int_{T} x(t)[\underbrace{\cos (k \omega_{1} t)-j \cdot \sin( k \omega_{1} t)}_{\textcolor{blue}{e^{-j k \omega_{1} t}}}] d t \\
+        &=\frac{1}{T} \int_{T} x(t) e^{-j k \omega_{1} t} d t
+    \end{aligned}
+    \nonumber
+\end{equation}
+
+Zusammenfassung:\\
+\fbox{
+    \parbox{.95\textwidth}{
+    \hl{Komplexe Fourierreihe:}
+        \begin{equation}
+        \begin{aligned}
+        &x(t)=x(t+T), \quad \omega_{1}=\frac{2 \pi}{T} \\
+        &x(t)=\sum_{k=-\infty}^{\infty} c_{k} \cdot e^{j k \omega_{1} t}, \quad c_{k}=\frac{1}{T} \int_{T} x(t) e^{-j k \omega_{1} t} d t \\
+        &k=0, \pm 1, \pm 2,\ldots
+        \end{aligned}
+\end{equation}
+    }
+}
+
+$C_k$ ist eine komplexe Zahl,
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.45\textwidth}
+    \begin{center}
+        \begin{equation}
+            \begin{split}
+                   c_{k}&=|c_k|\cdot e^{j\varphi k}\\
+                   |c_k|&=\dfrac{1}{2} \sqrt{a_{k}^{2}+b_{k}^{2}}=\dfrac{1}{2} A_k\\
+                   \varphi_k&=\operatorname{arg}(c_k)=\operatorname{atan2}(\operatorname{Im(c_k)},\operatorname{Re}(c_k))\\
+                            &=\operatorname{atan2}(-b_k, \, a_k)\\
+                    c_k&=c_{-k}^{*} \quad * \,-\, konjugiert \; komplex        
+            \end{split}
+            \nonumber
+        \end{equation}
+    \end{center}
+
+    \end{minipage}
+    \begin{minipage}{.45\textwidth}
+        \centering
+        \includegraphics[scale=0.17]{Bilder/Bilder_02/komp_Zahl.jpg}
+        \nonumber
+    \end{minipage}
+\end{figure}
+
+Darstellung von Amplituden- und Phasenspektrum:
+\begin{itemize}
+    \item
+    Wegen $c_k=c_{-k}^{*}$ \, $\rightarrow$ \, $|c_k|=c_{-k}$, \, $\varphi_k=-\varphi_{-k}$\\
+    $\rightsquigarrow$ \uline{Betragspektrum ist gerade, \, Phasenspektrum ist ungerade.}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.08]{Bilder/Bilder_02/gerade_ungerade.jpg}
+        \nonumber
+    \end{figure}
+    \item
+    für gerade \textcolor{red}{reelle} Signale $x(t)=x(-t)$:
+    \begin{equation}
+        \begin{aligned}
+            b_k&=0\\
+            c_k&=\dfrac{a_k-jb_k}{2}=\dfrac{a_k}{2}
+        \end{aligned}
+    \end{equation}
+    \uline{$c_k$ ist reell $\Longleftrightarrow$ $x(t)$ ist gerade.}
+    \item
+    für ungerade \textcolor{red}{reelle} Signale $x(t)=-x(-t)$:
+    \begin{equation}
+        \begin{aligned}
+            a_k&=0\\
+            c_k&=\dfrac{a_k-jb_k}{2}=-\dfrac{j b_k}{2}=\dfrac{b_k}{2j}
+        \end{aligned}
+    \end{equation}
+    \uline{$c_k$ ist imaginär $\Longleftrightarrow$ $x(t)$ ist ungerade.}
+\end{itemize}
+
+\textbf{Beispiel:}
+\begin{figure}[H]
+    \centering
+        \begin{minipage}{.45\textwidth}
+            \centering
+            \includegraphics[scale=0.1]{Bilder/Bilder_02/rechteck_impuls_bsp.png}
+            \caption{Rechteck-Puls und sinc-Funktion}
+            \label{fig: symmetrie}
+            %\nonumber
+        \end{minipage}
+        \hspace{1cm}
+        \begin{minipage}{.45\textwidth}
+            \begin{enumerate}
+                \item 
+                $x(t)$ ist periodisch
+                \item
+                Periode T
+            \end{enumerate}
+        \end{minipage}
+\end{figure}
+
+\begin{equation}
+\begin{aligned}
+x(t) &=\sum_{k=-\infty}^{\infty} c_{k} \cdot e^{i k \omega_{1} t} \\
+c_{k}&=\frac{1}{T} \int_{T} x(t) \cdot e^{-j k \omega_{1} t} d t\\
+     &=\frac{1}{T} \int_{-\tau / 2}^{\tau / 2} A \cdot e^{-j k \omega_{1} t} d t\\
+     &=\frac{A \tau }{T}\cdot \operatorname{Si} \left( \dfrac{k\pi\tau}{T} \right)= \frac{A \tau }{T}\cdot  \operatorname{Si}(\dfrac{1}{2} \cdot k\tau\omega_1 )  
+\end{aligned}
+\nonumber
+\end{equation}
+
+Plausibilität: \, \textbf{$x(t)$ ist gerade \,$\rightarrow$ \, $c_k$\, reell}\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Bilder/Bilder_02/Ein_Zwei_seitig.jpg}
+    \caption{Ein- und Zweiseitiges Amplitudenspektrum}
+\end{figure}
+
+
+\subsubsection{\textbf{Parsevalsche Gleichung}}
+Die Durchschnittleistung eines reellen periodischen Signals:
+
+\begin{equation}
+    \begin{aligned}
+        \overline{P_{x}} &=\frac{1}{T} \int_{T} x^{2}(t) d t \\
+        &=\frac{1}{T} \int_{T}\left[a_{0}+\sum_{k=1}^{\infty} a_{k} \cdot \cos (k \omega_{1} t)+\sum_{k=1}^{\infty} b_{k} \sin (k \omega_{1} t)\right]^{2} d t \\
+        &=\frac{1}{T}\left[T \cdot a_{0}^{2}+\frac{T}{2} \sum_{k=1}^{\infty} a_{k}^{2}+\frac{T}{2} \sum_{k=1}^{\infty} b_{k}^{2}\right] \\
+        &=a_{0}^{2}+\frac{1}{2} \sum_{k=1}^{\infty}\left(a_{k}^{2}+b_{k}^{2}\right) \, \textcolor{blue}{\leftarrow  reelle \;Fourierreihe\,} \\
+        \overline{P_{x}} &=\frac{1}{T} \int_{T}^{2} x^{2}(t) d t=\frac{1}{T} \int_{T}\left(\sum_{k=-\infty}^{\infty} a_{k} \cdot e^{j k \omega_{1} t}\right)^{2} d t \\
+        &=\sum_{k=-\infty}^{\infty}\left|c_{k}\right|^{2}
+    \end{aligned}
+    \nonumber
+\end{equation}
+
+\fbox{
+    \parbox{.95\textwidth}{
+        \hl{Parsevalsche Gleichung:}
+            \begin{equation}
+                \overline{P_{x}}=a_{0}^{2}+\frac{1}{2} \sum_{k=1}^{\infty}\left(a_{k}^{2}+b_{k}^{2}\right)=\sum_{k=-\infty}^{\infty}\left|c_{k}\right|^{2}
+            \end{equation}
+        }
+}
+
+\subsubsection{\textbf{Gibbs Phänomen}}
+\textbf{Für Rechteck-Puls:}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{.4\linewidth}
+        \centering
+        \includegraphics[width=1\linewidth]{Bilder/Bilder_02/Rechteck-Puls.png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}[c]{.5\linewidth}
+        \begin{equation}
+            \begin{aligned}
+                &x(t)=\dfrac{2A}{\pi}(\sin(\omega_1 t)+\dfrac{1}{3}\sin(3\omega_1 t) +\dfrac{1}{5}\sin(5\omega_1 t)+\ldots )\\
+                &\omega_1 = \dfrac{2\pi }{T}  
+            \end{aligned}
+            \nonumber
+        \end{equation}
+    \end{minipage}
+\end{figure}
+Erst wird der Rechteck-Puls aus der Überlagerung mehrerer Harmonischen grafisch dargestellt: 
+
+\begin{figure}[H]
+    \centering
+    \subfigure{
+    \begin{minipage}[b]{0.45\linewidth}
+        \includegraphics[width=.8\linewidth]{Bilder/Bilder_02/N=15.jpg}\vspace{4pt}
+        \includegraphics[width=.8\linewidth]{Bilder/Bilder_02/N=51.jpg}
+    \end{minipage}}
+    \subfigure{
+    \begin{minipage}[b]{0.45\linewidth}
+        \includegraphics[width=.8\linewidth]{Bilder/Bilder_02/N=25.jpg}\vspace{4pt}
+        \includegraphics[width=.8\linewidth]{Bilder/Bilder_02/N=101.jpg}
+    \end{minipage}}
+    \caption{Rechteck-Puls aus der Überlagerung mehrerer Harmonischen}
+\end{figure}
+
+Dann wird das "Gibbs-Phänomen" als folgende definiert und charakterisierst:
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{.5\linewidth}
+    \centering
+        \includegraphics[width=.9\linewidth]{Bilder/Bilder_02/Fourier-Synthese.jpg}
+        %\nonumber
+    \end{minipage}
+    \begin{minipage}[c]{.4\linewidth}
+        \begin{itemize}
+            \item
+            "Über- und Unterschiessen"\, vor und nach einer Sprungstelle
+            \item
+            Höhe der größten überschwingende Welle beträgt gegen 9\% (8,94\%) der gesamten Sprunghöhe
+            \item
+            Selbst bei \infty \,vielen Harmonischen bleibt die größten überschwingende Welle ca. 9\%, \, \hl{klingt aber schnell ab.}
+        \end{itemize}
+    \end{minipage}
+\end{figure}
+
+Bestimmung der Anzahl von Harmonischen in Bezug auf die mittlere Leistung:
+\begin{equation}
+    \begin{aligned}
+        P_m&=\sum_{k=-\infty}^{\infty }\left | C_k \right |^2=a_0^2+\frac{1}{2}\cdot \sum_{k=1}^{\infty}\left ( a_k^2+b_k^2\right)\\
+        P_N&=\sum_{k=-N}^{N}\left | C_k \right |^2=a_0^2+\frac{1}{2}\cdot \sum_{k=1}^{\infty}\left ( a_k^2+b_k^2\right)  
+    \end{aligned}
+\end{equation}
+Wenn $\dfrac{P_N}{P_m}=99\%$, dann hat die synthetisierte Profile $99\%$ Leistung des theoretischen Verlaufs.
+
+\subsubsection{Eigenschaften der Fouierreihe}
+\begin{enumerate}[label={(\arabic*)}]
+    \item 
+    Linearität:\\
+    \begin{center}
+            $\textit{FR}\{x(t)+y(t)\}=\textit{FR}\{x(t)\}+\textit{FR}\{y(t)\}$\\
+    \end{center}
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.95\linewidth]{Bilder/Bilder_02/Lineraritaet.jpg}
+        %\caption{Caption}
+        %\label{fig:my_label}
+    \end{figure}
+    \item
+    Lineare Modifikation:\\
+    \begin{equation}
+    \begin{aligned}
+        &\textit{FR} \{\dot{x}\}=\frac{d}{d t} \textit{FR}\{x(t)\}\\
+        &\textit{FR}\left\{\int x(t) d t\right\}=\int \textit{FR}\{x(t)\} d t
+    \end{aligned}
+    \nonumber
+    \end{equation}
+    \item
+    Verschiebungssatz:\\
+    \begin{equation}
+        \textit{FR}\left\{x\left(t-t_{0}\right)\right\}=\textit{FR}\{x(t)\} \cdot e^{-j k \omega_{1}t_0}
+    \end{equation}
+    \nonumber
+    D.h.,durch die Verschiebung im Zeitbereich um einen Abstand $t_0$: $x(t\pm t_0)$ ist die Multiplikation mit $e^{\mp j k \omega_{1}t_0}$ im Frequenzbereich vorgesehen, und vice versa.
+    \item
+    Symmetrieeigenschaften:
+        \begin{itemize}
+            \item [-]
+            gerade reelle Signale:\\
+            $b_k=0, \quad c_0=a_0, \quad c_k=\frac{1}{2}a_k, \: k=1,2,\ldots$\\
+            \textit{$c_k$ ist reell.}
+            \item [-]
+            ungerade Signale:\\
+            $a_0=a_k=0, \quad c_k=\dfrac{b_k}{2j}$\\
+            \textit{$c_k$ ist imagnär.}
+        \end{itemize}
+    Beispiel: s.o. Abb.\ref{fig: symmetrie}
+\end{enumerate}
+
+\subsection{Fouriertransformation und Analyse aperiodischer Signale}
+\subsubsection{Von Fourierreihe zu Fouriertransformation}
+\fbox{
+    \parbox{.95\linewidth}{
+        \textit{Wiederholung: Fourierreihe}
+        \begin{equation}
+            \begin{aligned}
+                    C_n=&\dfrac{1}{T}\int_{-\frac{T}{2}}^{\frac{T}{2}}x(t)\cdot e^(-jn\omega_0 t)dt\\
+                    \omega_0 -& Grundfrequenz, \: \omega_0 = \dfrac{2\pi}{T}\\
+                    C_n -& Fourierreihe-Koeffizient, C_n = \left |C_n\right |\cdot e^(j\angle{C_n})\\
+                    &Frequenzkomponente \: bei \:Frequenz n\cdot \omega_0
+            \end{aligned}
+            \nonumber
+        \end{equation}
+    }
+}
+Im folgenden wird der 
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
+\textit{Was habe ich getan, aus welchem Grund und auf welche Art und Weise? Welche Ergebnisse sind daraus entstanden und welche Erkenntnisse/Schlussfolgerungen lassen sich daraus ableiten?}\\
+\end{comment}
+
+
+
+\newpage

@@ -1,0 +1,379 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TU Dresden - Stiftungsprofessur für Baumaschinen						  %%%
+%%% Latex-Vorlage für Studien- und Abschlussarbeiten						  %%%
+%%% Version: 1.7															  %%%
+%%% Erstellt von: Robert Zickler											  %%%
+%%% Verbesserungen, Fragen, Hinweise?: eMail an: robert.zickler@tu-dresden.de %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Die Masterdatei ist die Datei, die von Latex übersetzt wird, sie enthält die Präambel in der die Formatierung festgelegt wird und zusätzliche Pakete geladen und konfiguriert werden. Der Name kann entsprechend geändert werden: z. B. 00Masterdatei.tex -> Diplomarbeit_Nachname.tex
+%Dabei muss beachtet werden, dass bei jeder Dateiumbenennung, die kompilierten Zusatzdateien (*.lof, *.out, ...) im Ordner gelöscht werden müssen. Achtung: TEX- und BIB-Datei nicht löschen und öfters sichern ;) (z. B. mit GitHub o. Ä.)
+
+\documentclass[11pt, twoside, numbers=noenddot, bibliography=totoc, listof=entryprefix, draft=false]{scrartcl}	%https://ctan.space-pro.be/tex-archive/macros/latex/contrib/koma-script/doc/scrguide.pdf
+% fleqn					Gleichungne linksbündig 
+% totoc					Quellen in das Inhaltsverzeichnis
+% twoside 				Doppelseitiges Dokument (Duplex) (Ref: oneside)
+% numbers=noenddot 		Kein Punkt hinter der Letzzten Kapitelnummer (z. B. 1.2.3. -> 1.2.3)
+% listof=entryprefix	Tabellen- und Abbildungsverzeichnis mit Präfix "Tab." bzw. "Abb."
+% draft					Entwurf (Bilder und PDF werden nicht eingebunden und durch Platzhalter ersetzt, Quellen werden nicht zugeordnet => schnelleres Übersetzen)
+
+%\usepackage{xcolor}
+% Bitte folgenden Absatz ausfüllen
+% Einstellungen für die Meta-Daten der PDF-Datei. Einsehbar z. B. mit Adobe Reader: [Datei] -> [Eigenschaften...] -> [Beschriebung]
+\usepackage[pdfauthor={Xueyong Lu},																	% <<<<<<<<=============
+            pdftitle={00Masterdatei},														% <<<<<<<<=============
+            pdfsubject={Art der Arbeit (Studienarbeit)},						% <<<<<<<<=============
+            pdfkeywords={Wahlweise ein paar Stichworte (z. B. Latex, Vorlage, Beispiele, Baumaschine, ...}	% <<<<<<<<=============
+            %pdfborderstyle={/S/U/W 1}, % underline links instead of boxes
+            %linkbordercolor=blue,      % color of internal links
+            %citebordercolor=blue,      % color of links to bibliography
+            %filebordercolor=blue,      % color of file links
+            %urlbordercolor=cyan        % color of external links
+            ]{hyperref}		
+
+
+%\usepackage{showframe} 				% Aktivieren (Auskommentieren) um sich die einzelnen Rahmen im Dokument anzeigen zu lassen
+
+
+%%% Seiteneinstellungen (Seitenränder, Kopf und Fußzeile)
+\usepackage[
+	paper	= a4paper, 					% A4-Papierformat
+	inner	= 3cm, 						% Da Doppelseitig gedruck: Abstand nach innen (zur Info die Alternative bei Einseitendruck: left)
+	outer	= 2cm, 						% Da Doppelseitig gedruck: Abstand nach außen (zur Info die Alternative bei Einseitendruck: right)
+	bottom	= 2.5cm,					% Seitenrand nach unten
+	top		= 2.5cm,					% Seitenrand nach oben
+	bindingoffset = 0mm					% Innerer Seitenrand ohne zusätzlichem Offset für die Bindung	
+	]{geometry}				
+
+% Folgendes Paket erzeugt fortlaufend eine Warnung. Diese kann aber ignoriert werden. Paket solle evtl. zukünftig durch das "scrlayer-scrpage"-Paket erstetzt werden
+\usepackage{fancyhdr}					% Paket zur einfacheren Manipulation von Kopf- und Fußzeile 
+\pagestyle{fancy} 						% http://www.mrunix.de/forums/showthread.php?65468-Section-Name-ohne-Nummer-in-die-Kopfzeile
+\fancyhf{}								% Voreingestellte Kopf- und Fußzeile löschen
+\fancyfoot[EL,OR]{\thepage}				% Seitenzahl am äußeren Rand des Seitenfußes
+\renewcommand{\footrulewidth}{0.4pt}
+\newcommand{\headerOn}{\fancyhead[EL,OR]{\nouppercase{\footnotesize\leftmark}}}	% eigener Befehl um die Kopfzeile zu deaktivieren
+\newcommand{\headerOff}{\fancyhead[EL,OR]{\color{white}\leftmark}} 				% eigener Befehl um die Kopfzeile zu aktivieren
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Unkategorisierte Pakete
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+                                        % Bibliothek für Hypertext-Link
+\usepackage{graphbox}                   % mit subfigure[align=c, scale=0.5]{*.png}
+%\usepackage{pifont}
+\usepackage{amsmath}
+\numberwithin{equation}{section}        % Formel nach Kapiteln neu beziffern
+\numberwithin{figure}{section}          % Abbildung nach Kapiteln neu beziffern
+\usepackage{amssymb}
+\usepackage{pifont}
+\usepackage{wrapfig}
+\usepackage{subfigure}
+\usepackage{float}                      % Zugriff auf eine andere Datei in derselben Pfad
+\usepackage{ulem}
+\usepackage{ctex}
+\usepackage{color,soul}                 % Unterstreichen und Hervorheben von Texten
+\usepackage{verbatim}                   % Mehrzeilige Kommentare
+\usepackage{multirow}					% Tabelle zwei Zeilen verbinden
+\usepackage{xltabular}					% Tabelle bis an den Seitenrand bei "X" z. B.: \begin{tabularx}{\linewidth}{|l|X|}
+\usepackage{booktabs}					% Zum Erstellen von Tabellen mit booktabs	\toprule, \midrule \bottomrule
+\usepackage{longtable} 					% Für Tabellen über mehrere Seiten z. B. Formelverzeichnis
+\usepackage{pbox}						% Zeilenumbrüche in Tabelle https://tex.stackexchange.com/questions/2441/how-to-add-a-forced-line-break-inside-a-table-cell/19678
+\usepackage{array}						% Zum Erstellen von Arrays
+\usepackage{mathrsfs}					% Von geogebra. Tipp: in Geogebra kann eine Darstellung direkt nach Latex exportiert werden
+\usepackage{pdfpages} 					% Zum Einbinden einer PDF-Seite https://stackoverflow.com/questions/2739159/inserting-a-pdf-file-in-latex
+\usepackage{rotating}					% Ermöglicht das Drehen einer oder mehrerer Seiten (Querformat). Kopf und Fußzeile bleiben davon unberührt (\begin(sidewaysfigure))
+\usepackage{graphicx}					% Zum Einbinden von Bildern
+\usepackage{blindtext}					% Zum Erzeugen von Blindtexten. Wird nur für diese Vorlage verwendet
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Schriftarteinstellungen
+\usepackage{fontspec}					% Für die Schriftauswahl
+\setmainfont{OpenSans-Regular.ttf}[		% Open Sans (CD der TU Dresden) als Schriftart festlegen
+	Path = Schriftarten/,
+	BoldFont = OpenSans-Bold.ttf ,
+	ItalicFont = OpenSans-Italic.ttf ,
+	BoldItalicFont = OpenSans-BoldItalic.ttf ]
+\urlstyle{same}							% URL mit selber Schriftart wie Text
+\usepackage[mathrm=sym]{unicode-math}	% https://github.com/firamath/firamath Matheschriftart im Open Sans Style
+\setmathfont{Fira Math}					% Schriftart für mathematische Ausdrücke
+\usepackage{latexsym}					% Zum Erzeugen diverser Symbole und Zeichen
+\usepackage[ngerman]{babel}             % Rechtschreibung "n" steht für neue dt. Rechtschreibung
+\usepackage{csquotes}					% Darstellen der Zitate entsprechend der gewählten Rechtschreibregeln
+\setlength{\parindent}{0pt} 			% Kein Einrücken nach Textumbruch
+%\usepackage[onehalfspacing]{setspace}	% 1,5 facher Zeilenabstand. Nicht auskommentieren nur zur Referenz. Korrekte Einstellung wird im Folgenden definiert
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%% 1,5 facher Zeilenabstand entsprechend Word
+\usepackage{setspace}
+\makeatletter
+\newcommand{\MSonehalfspacing}{%
+  \setstretch{1.44}%  default
+  \ifcase \@ptsize \relax % 10pt
+    \setstretch {1.448}%
+  \or % 11pt
+    \setstretch {1.399}%
+  \or % 12pt
+    \setstretch {1.433}%
+  \fi
+}
+\newcommand{\MSdoublespacing}{%
+  \setstretch {1.92}%  default
+  \ifcase \@ptsize \relax % 10pt
+    \setstretch {1.936}%
+  \or % 11pt
+    \setstretch {1.866}%
+  \or % 12pt
+    \setstretch {1.902}%
+  \fi
+}
+\makeatother
+\MSonehalfspacing
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Tabellenüber- und Abbildungsunterschriften
+\renewcaptionname{ngerman}{\figurename}{Abb.} 	% "Abbildung" und "Tabelle" in "Abb." und "Tab." umbenennen
+\renewcaptionname{ngerman}{\tablename}{Tab.}
+\usepackage[
+	font=small,
+	labelfont=bf,
+    justification=RaggedRight,	% Bildunterschrift linksbündig
+    singlelinecheck=false		% Bildunterschrift linksbündig
+	]{caption} 	% Bildunterschriften Schritarteigenschaften
+	
+% Abbildungsunterschriften mittg anlegen	
+\usepackage[justification=centering]{caption}	
+
+\def\allfiles{}
+
+\begin{comment}
+\usepackage[				% Bei mehreren Bildern in einer Abbiildung (subcaption). Darstellungseigenschaften
+	font=small,				% Kleine Schriftart
+	list=on, 				% Aufnehmen im LoF (List of Figures)
+	listformat=simple,		% Darstellung im LoF
+	labelfont=bf, 			% Fett schreiben
+	labelformat=brace, 		% a) Klammer nach dem Bezeichner a), b),...
+	position=bottom			% Label unterhalb
+	]{subcaption}
+\BeforeStartingTOC[lof]{\renewcommand*\autodot{:}}	% ListOfFigures mir Doppelpunkt z. B.: Tab 3: Beschriftung .... Nummer
+\BeforeStartingTOC[lot]{\renewcommand*\autodot{:}}	%
+\end{comment}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Einstellung der vertikalen Abstände zwischen Gleichungen
+\begin{comment}
+\makeatletter
+\renewcommand\normalsize{%
+\@setfontsize\normalsize\@xpt\@xiipt
+\abovedisplayskip 5\p@ \@plus2\p@ \@minus5\p@
+\abovedisplayshortskip \z@ \@plus5\p@
+\belowdisplayshortskip 8\p@ \@plus5\p@ \@minus5\p@
+\belowdisplayskip \abovedisplayskip
+\let\@listi\@listI}
+\makeatother
+\end{comment}
+
+
+%%% Einstellungen der Überschriften (Schriftgröße, Großbuchstaben, etc.
+\addtokomafont{section}{\fontsize{18}{18} \selectfont\MakeUppercase}		% Schriftgröße Überschrift 1.
+\addtokomafont{subsection}{\fontsize{14}{14} \selectfont\MakeUppercase}		% Schriftgröße Überschrift 1.1
+\addtokomafont{subsubsection}{\fontsize{12}{12} \selectfont}				% Schriftgröße Überschrift 1.1.1
+\addtokomafont{paragraph}{\fontsize{11}{11} \selectfont}					% Schriftgröße Überschrift 1.1.1.1
+\setcounter{secnumdepth}{4}													% Numerierungstiefe bis einschließlich 4. Ebene z. B. 1.2.3.4
+\setcounter{tocdepth}{3}													% Nur bis zur dritten ebene ins Inhaltsverzeichnis (default)
+\DeclareNewSectionCommand[													% https://tex.stackexchange.com/questions/377032/newcommand-for-subsubsubsection
+  style=section,
+  level=4,
+  beforeskip=-3.25ex plus -1ex minus -.2ex,
+  afterskip=1.5ex plus .2ex,
+  counterwithin=subsubsection
+]{subsubsubsection}															% Eigener Befehl für die 4. Gliederungsebene \subsubsubcation | \paragraph{•} bitte nicht verwenden
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% SI-Einheiten http://texwelt.de/wissen/fragen/2588/wie-schreibe-ich-zahlen-mit-einheiten-richtig
+\usepackage{siunitx}   							% SI-Einheiten
+\sisetup{										% Handbuch: https://mirror.informatik.hs-fulda.de/tex-archive/macros/latex/contrib/siunitx/siunitx.pdf
+  	locale = DE ,								% Deutsche Schreibweise
+  	per-mode = fraction,						% Bruch-Schreibweise (zur Info die alternativen: reciprocal | symbol)
+  	detect-all = true,							% Alle berücksichtigen
+	detect-inline-family = math}				% Mathe-Schriftart bei Verwendung von SI-Einheiten im Text
+% Eine Währung ist zwar keine SI-Einheit, für die Darstellung kann die Umgebung dennoch genutzt werden
+\DeclareSIUnit{\sieuro}{\mbox{\euro}}			% Euro-Symbol hinzufügen
+\DeclareSIUnit{\sidollar}{\mbox{\$}}			% Dollar-Symbol hinzufügen
+\DeclareSIUnit{\siyuan}{\mbox{\textyen}}		% Yuan-Symbol hinzufügen
+\DeclareSIUnit{\sipound}{\mbox{\pounds}}		% Pfund-Symbol hinzufügen
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Gleichungen
+% \numberwithin{equation}{section}				% Nicht verwenden, nur zur Refferenz. Gleichungen nach Kapitel nummerieren https://golatex.de/gleichungen-nummerieren-t3753.html 
+\DeclareMathOperator{\arctantwo}{arctan2}		% darstellen von arctan2 mit dem Befehl \arctan2
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Quellcode und Algorithmen
+% https://ftp.rrzn.uni-hannover.de/pub/mirror/tex-archive/macros/latex/contrib/listings/listings.pdf
+\usepackage{listings}										% Paket zum einbinden von Quellcode 
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}	% Überschrift im Verzeichnis
+\newcaptionname{ngerman}{\lstlistingname}{Quelltext}		% Beschriftung von Quelltextabbildungen
+\lstset{
+	frame=single,							% Horizontale Linie oben und unten
+	numbers=left, %eller none
+	xleftmargin=2em,						% Zeilennummer in den Rahmen
+	framexleftmargin=1.5em,					% Zeilennummer in den Rahmen
+	numberstyle=\tiny\color{darkgray},
+	breaklines=true,
+	breakatwhitespace=true,
+	showstringspaces=false,					% Lehreichen ohne Markierung
+	commentstyle=\color{darkgray},			% Farbe der Kommentare
+	tabsize=3,
+	escapeinside={(*@}{@*)},				% Definition des Befehles zum erzeugen eines Zeilenverweises
+	% showtabs=true,tab=\rightarrowfill		% Durch einkommentieren lassen sich die Tabulatorzeichen anzeigen. In der finalen Datei bitte auskommentieren
+}
+\usepackage[
+	german,
+	linesnumbered,
+	lined,
+	boxed,
+	ruled,
+	commentsnumbered
+	]{algorithm2e}							% Paket zum Erzeugen von Algorithmen
+\SetNlSty{bfseries}{\color{darkgray}}{}		% Farbe Zeilennummerierung
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Stichpunkte
+\usepackage{enumitem}							% Handbuch: http://mirror.physik-pool.tu-berlin.de/pub/CTAN/macros/latex/contrib/enumitem/enumitem.pdf
+\setitemize{itemsep=-0.15cm}					% Zeilenabstand bei Stichpunkten
+\newlist{titemize}{itemize}{1}					% Neue Listenumgebung für Tabellen
+\setlist[titemize]{nosep, label=\textbullet, leftmargin=*, after=\strut}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%% Zitate und Quellen
+\usepackage[									% Handbuch: https://ftp.mpi-inf.mpg.de/pub/tex/mirror/ftp.dante.de/pub/tex/info/translations/biblatex/de/biblatex-de-Benutzerhandbuch.pdf
+	style=numeric-comp,								% Zitierstile
+	sorting = nty,									% Sortierungsschema Siehe Handbuch 3.1.2.1
+	backend = biber,								% Biber, das Standardbackend von BibLaTeX (default)
+	firstinits=true									% Nur den ersten Buchstaben des Vornamen anzeigen
+	]{biblatex}										% natbib=true,  authoryear-ibid
+\addbibresource{9999Quellen.bib}				% Datei in der alle Quellen aufgeführt werden
+\DeclareNameAlias{default}{family-given}				%Familienname dann Vorname
+\DefineBibliographyStrings{ngerman}{
+   andothers = {{et\,al\adddot}},
+}														% "u. A." in "et al."
+\renewcommand*{\multinamedelim}{\addsemicolon\space}	% Trenner zwischen den Namen ein Semikolon
+\renewcommand*{\labelnamepunct}{\addcolon\space}		% Doppelpunkt nach dem letzten Namen
+\renewcommand*{\finentrypunct}{\addspace}				% Kein Punkt am Ende des Literaturverzeichnis
+\renewcommand*{\prenotedelim}{\addnbspace}				% Kein Zeilenumbruch im Verweis https://golatex.de/autocite-kein-zeilenumbruch-t18069.html
+\renewcommand*{\postnotedelim}{\addcomma\addnbspace}	% Komma statt Punkt
+\renewcommand*{\multicitedelim}{\addcomma\addnbspace}	% Komma statt Punkt
+\renewcommand*{\extpostnotedelim}{\addnbspace}			% für Abstände 
+\renewcommand*{\volcitedelim}{\addcomma\addnbspace}		% für Abstände 
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% tikz - Umfangreiche Bibliothek für diverse Darstellungen, Grafen, ect.
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, shapes.geometric, arrows.meta, quotes, angles, patterns,decorations.pathmorphing,decorations.markings}	%je nach Bedarf beliebig anpassen
+% weitere Einstellungen für die tikz-Erstellung von z. B. Ablaufplänen
+\tikzset{
+>={Triangle[]},
+base/.style={draw, align=center, minimum height=1.75cm, minimum width=2cm},
+    node distance=1.75cm,
+    startstop/.style={rectangle, rounded corners = 3mm, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill = black!20},
+    process/.style={rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black},
+    io/.style={trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30},
+    decision/.style={base, diamond, aspect=2,  text width=10em, inner sep=-1pt},
+    subroutine/.style = {rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black,  path picture={\draw([xshift=1mm]path picture bounding box.north west)--([xshift=1mm]path picture bounding box.south west)([xshift=-1mm]path picture bounding box.north east)--([xshift=-1mm]path picture bounding box.south east);}},
+    }
+\tikzset{										% zwei Farben in Pfeil
+bicolor/.style 2 args={
+  dashed,dash pattern=on 10pt off 10pt,->,#1,
+  postaction={draw,dashed,dash pattern=on 10pt off 10pt,->,#2,dash phase=10pt}
+  },
+}
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Graphen
+\usepackage{pgfplots}   	% Graphen zeichnen
+\pgfplotsset{compat=newest} % Legende unter dem Graph
+\usepgfplotslibrary{units} 	% eingabe von Einheiten in pfgplots
+\usetikzlibrary{arrows} 	% Pfeilspitzen
+\pgfplotsset{				% Darstellung von Graphen festlegen (kann in den einzelnen Graphen separat angepasst werden)
+	major grid style={dashed,gray!50},
+    minor grid style={dashed,gray!20},
+	x tick label style={rotate=90,anchor=east},
+	x label style={at={(axis description cs:0.99,0)}},
+	y label style={at={(axis description cs:0,1)},rotate=-90},
+	scaled y ticks = false,
+	/pgf/number format/.cd,fixed,precision=4,
+	/pgf/number format/use comma          
+    }   
+\usetikzlibrary{backgrounds}	%um in den Hintergrund zeichnen zu können https://tex.stackexchange.com/questions/18200/draw-edges-and-paths-in-the-background-of-nodes-in-tikz
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\hypersetup{CJKbookmarks=true}
+\begin{sloppypar} 
+%Hier beginnt das eigentliche Dokument. Ratsam ist es, dieses in Unterabschnitte aufzuteilen. Diese werden in seperaten Dokumenten (*.tex) bearbeitet und an dieser Stelle zum Gesamtdokument zusammengefügt. Um die Kompilierungszeit zu minimieren können Abschnitte, die gerade nicht bearbeitet werden einfach auskommentiert werden. Um eine übersicht über die Reihenfolge zu wahren ist es ratsam die Dateibezeichnung entsprechend zu nummereieren. In Texmaker werden links die einzelnen Abschnitte angezeigt.
+%TIpp: aktiviere unter [Option]->[aktuelle Datei als 'Masterdatei' erklären]. Damit wird immer dieses Dokument kompiliert und alle oben eingebundenen Bibliotheken mit geladen. Egal in welchem Unterdokument gerade gearbeitet wird.
+%\pagenumbering{Roman}					%Start der römischen Seitennummerierung
+
+\begin{comment}
+\headerOff								%Kopfzeile ausblenden bis zum Textteil (selbst definiertes Kommando)
+\input{01Titelseite}
+\input{02Aufgabenstellung}
+\headerOn								%Kopfzeile beginnen (selbst definiertes Kommando)
+\input{03Kurzreferat}
+\tableofcontents						%Inhaltsverzeichnis. Wird automatisch erstellt
+\newpage
+\input{04AbkürzungSymbolVerzeichnis}
+\pagenumbering{arabic}					%Start der arabischzen Seitennummerierung
+\input{10MotivationUndProblemstellung}
+\input{20StandDerForschungUndEntwicklung}
+\input{30ZielsetzungUndInhaltDerArbeit}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% |||||||||||                |||||||||||        |||||||||||                ||||||||||| %%%
+%%% vvvvvvvvvvv Arbeitsbereich vvvvvvvvvvv %%%%%% vvvvvvvvvvv Arbeitsbereich vvvvvvvvvvv %%%
+
+%Die entsprechenden Dateinamen ab hier entsprechend der Kapitelüberschrift benennen und die Nummerierung gegebenenfalls anpassen. Die Nummerierung muss dabei nicht zwangsweise den Kapitelüberschriften entsprechen, erhöht aber die Übersicht in der linken Editor-Spalte (Struktur) bzw. im Ordner.
+%Achtung: nach dem Umbenennen kann es sein, dass Latex die zugeordneten Dateien nicht mehr findet und eine entsprechende Fehlermeldung ausgibt. Dann einfach via [Werkzeuge] -> [Aufräumen] -> Dateien löschen
+
+\input{40Hauptteil}
+\input{50Kapitelüberschrift}	
+\input{55AbschnittMitVielUebersetzungsaufwand}
+\input{60TabellenAbbildungenUndHinweiseLatex}
+\input{70ZitierenUndQuellen}
+
+%\input{...Weitere Kapitel oder Unterkapitel in seperaten Dateien}
+
+
+%%% ^^^^^^^^^^^ Arbeitsbereich ^^^^^^^^^^^ %%%%%% ^^^^^^^^^^^ Arbeitsbereich ^^^^^^^^^^^ %%%
+%%% |||||||||||                |||||||||||        |||||||||||                ||||||||||| %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{9991ZusammenfassungUndAusblick}
+\input{999_QuellenAbbildungenTabellen}	%Datei nicht bearbeiten. Eintragungen werden automatisch vorgenommen
+\input{9993Selbständigkeitserklärung}	%<--Datei ergänzen
+\headerOff
+\input{9994Anhang}
+\end{comment}
+
+
+\headerOn
+\input{00_Titelseite}
+%\input{01_Einführung}
+\input{02_Fourier-Reihe}
+%%%\input{999_QuellenAbbildungenTabellen}
+
+\end{sloppypar}
+\end{document}
+
+%' Anführungszeichen'("Text", ``Text´´) durch \glqq{}Text\grqq{} ersetzen
+
+%Bei allgemein bekannten Abkürzungen wie z. B., u. a. oder i. d. R. musst du nach jedem Einzelwort einen Punkt sowie ein Leerzeichen setzen, eine Ausnahme hiervon bildet usw. Hier kannst du am besten ein geschütztes Leerzeichen verwenden, sodass die Abkürzung nicht über zwei Zeilen verteilt steht.
+%Im vollen Wortlaut gesprochene Abkürzungen schreibst du also mit einem Punkt, z. B. Mag. für Magister, Jh. für Jahrhundert und v. Chr. für vor Christi Geburt.
+%Fällt das Ende der Abkürzung mit dem Satzende zusammen, setzt du nur einen Punkt, bei einem Frage- oder Ausrufesatz jedoch Punkt und Zeichen: Ist er wirklich schon Mag.? 

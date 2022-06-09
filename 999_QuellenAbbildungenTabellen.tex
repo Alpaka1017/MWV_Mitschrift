@@ -1,0 +1,29 @@
+\setlength{\emergencystretch}{3em}
+
+%Quellenverzeichnis. Die entsprechende Datei wird in der Präambel der Masterdatei deklaiert (z. B. \addbibresource{9999Quellen.bib})
+%\renewcommand{\refname}{Quellenverzeichnis}
+%\printbibliography
+\printbibliography[title=Literaturquellen,nottype=online]
+\printbibliography[title=Onlinequellen,type=online]
+\newpage
+
+%Abbildungsverzeichnis. Wird automatisch erstellt
+\phantomsection 
+\addcontentsline{toc}{section}{Abbildungsverzeichnis}
+\listoffigures
+\newpage
+
+%Tabellenverzeichni. Wird automatisch erstellt
+\phantomsection 
+\addcontentsline{toc}{section}{Tabellenverzeichnis}
+\listoftables
+\newpage
+
+%Quellcodeverzeichnis. Wird automatisch erstllt
+{\color{red}Diese und die folgenden drei Zeilen bitte auskommentieren, wenn kein Quellcode in der Arbeit eingebunden wurde:}
+	\phantomsection
+	\addcontentsline{toc}{section}{\lstlistlistingname}
+	\lstlistoflistings
+	\newpage
+	
+\cleardoubleemptypage					%Leere Seite einfügen wenn auf einer Forderseite beendet wurde

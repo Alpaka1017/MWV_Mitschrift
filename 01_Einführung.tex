@@ -1,0 +1,650 @@
+\section{Einführung}
+%\ifx\allfiles\undefined
+\sethlcolor{yellow}
+\subsection{\textbf{Aufgaben und Inhalt}}
+Siehe \href{run:Bilder/ Referenzen/ Mitschrift-MWV-SS2021-Handout.pdf}{Messwertverarbeitung und Diagnosetechnik}.
+\subsection{\textbf{Klassifikation der Signale {\itshape x(t)}}}
+Einteilungskriterium:\par
+%\hspace{1em} - nach der zeitlichen Quantisierung\par
+%\hspace{2em} $\bullet$ Ein Signal x(t) ist \hl{zeit-kontinuierlich}, wenn die Amplitude zu jedem beliebigen Zeitpunkt veränderbar ist.\par
+\hspace{1em} - Nach der zeitlichen Quantisierung\par
+\begin{itemize}[topsep=2pt]
+     \item
+     Ein Signal \itshape x(t) ist \hl{zeit-kontinuierlich}, wenn die Amplitude zu jedem beliebigen Zeitpunkt veränderbar ist.
+     \item
+     Ein Signal \itshape x(t) ist \hl{zeit-diskret}, wenn die Amplitude nur zur diskreten Zeitpunkten veränderbar ist.
+\end{itemize}
+
+\hspace{1em} - Nach Quantisierung der Amplitude
+\begin{itemize}[topsep=2pt]
+     \item
+     \hl{analoges Signal}: Signale, die kontinuierlich veränderliche Zeit und Amplituden haben.
+     \item
+     \hl{digitales Signal}: Signale, deren Amplitude nur auf endliche Anzahl diskreter Werte beschränkt, zeit-diskretes Signal.
+\end{itemize}
+
+\hspace{1em} - Reelle und komplexe Signale\par
+\hspace{1em} - Nach der Reproduzierbarkeit\par
+\begin{itemize}[topsep=2pt]
+    \item 
+    deterministische Signale
+    \item
+    zufällige Signale (stochastische Signale)
+\end{itemize}
+
+% Einfügen von "Klassifikation_Signale.pdf", die Bildformat kann *.jpg, *.png, *.pdf, *.eps, *.tiff usw.
+\begin{figure}[H]
+\centering
+\includegraphics[width=105mm]{Bilder/Bilder_01/Klassifikation_Signale.pdf}
+\caption{Klassifikation\ von\ Signalen}
+\label{fig:env}
+\end{figure}
+
+%\clearpage
+\hspace{1em} - Einteilung nach der Leistung/ Energie:\par
+
+% Wrapfigure: 3 Zeile, links gelegt, Breite 12.5em
+\begin{figure}[H]
+    \centering
+    \subfigbottomskip=10pt
+    \subfigcapskip=-3pt
+    \subfigure[Bsp.:Ohm'sches Gesetz]{
+		\includegraphics[width= 50mm]{Bilder/Bilder_01/Widerstand.png}}
+	\subfigure[Formeldarstellung]{
+		\includegraphics[width=70mm]{Bilder/Bilder_01/Formel_1.png}}
+	  \\
+	\caption{Physikalische Analogie}
+\end{figure}
+\hspace{1em} Definition:\par
+\hspace{2em} - \hl {Momentanleistung} eines Signals {\itshape x(t)}:\par
+
+\begin{equation}
+    P_{x} (t)=x^{2} (t) \cdots Autoleistung
+\end{equation}
+\begin{equation}
+    P_{xy} (t)=x(t)\cdot y(t) \cdots Kreuzleistung
+\end{equation}
+
+\hspace{2em} - \hl {Die mittelere Leistung} eines Signals {\itshape x(t)}:\par
+\begin{equation}
+    \bar{P_{x}} =\lim_{T \to \infty} \frac{1}{2T} \int\limits_{-T}^{T} x^{2} (t)dt
+\end{equation}
+
+\hspace{2em} - \hl {Die Gesamtenergie} eines Signals {\itshape x(t)}:\par
+\begin{equation}
+    E_{x}=\int\limits_{-\infty }^{\infty} P_{x} (t)dt=\int\limits_{-\infty}^{\infty}x^{2} (t)dt
+\end{equation}
+
+
+\begin{itemize}[topsep=2pt]
+     \item
+     \hl{Leistungssignal}: Ein Signal {\itshape x(t)} ist ein Leistungssignal, wenn seine Energie bzw. sein Integral der Leistung über unendlichen Zeitbereich ebenfalls unendlich ist. \par
+     \begin{figure}[h]
+         \centering
+         \subfigbottomskip=10pt
+         \subfigcapskip=3pt
+         \subfigure[x(t)=sin($\omega$ t)]{
+             \includegraphics[width=0.3\linewidth]{Bilder/Bilder_01/Sinus_Funktion.png}
+         }\hspace{2cm}
+         \subfigure[Mathematische\ Beschreibung]{
+             \includegraphics[width=0.3\linewidth]{Bilder/Bilder_01/Leistungssignal.png}
+        }
+     \caption{Leistungssignal}
+     \end{figure}
+     
+     \item
+     \hl{Energiesignal}: Ein Signal {\itshape x(t)} ist ein Energiesignal, wenn seine Gesamtenergie begrenzt ist: $E_{x}<\infty \to \bar{P_{x}}=0$\par
+\end{itemize}
+     
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Bilder/Bilder_01/Sinus_abklingt.png}
+    \caption{Abklingende Sinus-Funktion}
+    \label{fig:Abklingende Sinus-Funktion}
+\end{figure}
+
+\hspace{2em} - Nach der Kausalität (kausales Signal):\par
+\begin{equation}
+    x(t)=\left\{
+	\begin{aligned}
+	0, \quad \mbox{für}\ x<0\\
+	beliebig, \quad \mbox{für}\ x\ge 0
+	\end{aligned}
+	\right
+	.
+\end{equation}
+
+\subsection{\textbf{Mathematische Grundlagen}}
+\subsubsection{\textbf{Harmonische Funktion}}
+\begin{figure}[h]
+    \centering
+    \subfigbottomskip=10pt
+    \subfigcapskip=3pt
+    \subfigure[Sinusfunktion]{
+        \includegraphics[width=0.4\linewidth]{Bilder/Bilder_01/Math_Sinus.png}
+    }
+    \subfigure[Parameter]{
+        \includegraphics[width=0.4\linewidth]{Bilder/Bilder_01/Param_Sinus.png}
+    }
+    \caption{Einfache harmonische Funktion}
+    \label{fig:Einfache harmonische Funktion}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \subfigbottomskip=10pt
+    \subfigcapskip=3pt
+    \subfigure[sin($\omega$t)]{
+        \includegraphics[width=0.3\linewidth]{Bilder/Bilder_01/sin(omegaxt).png}
+    }
+    \subfigure[sin($\omega$t-$\varphi$)]{
+        \includegraphics[width=0.3\linewidth]{Bilder/Bilder_01/sin(omegaxt-phi).png}
+    }
+    \subfigure[sin($\omega$t+$\varphi$)]{
+        \includegraphics[width=0.3\linewidth]{Bilder/Bilder_01/sin(omegaxt+phi).png}
+    }
+    \caption{Caption}
+    \label{fig:my_label}
+\end{figure}
+
+
+\subsubsection{\textbf{Komplexe Zahlen}}
+
+\begin{figure}[H]
+    \centering
+    \subfigbottomskip=10pt
+    \subfigcapskip=3pt
+    \subfigure[]{
+        \includegraphics[align=c,width=0.4\linewidth]{Bilder/Bilder_01/reele_achse.png}
+    }
+    \subfigure[]{
+        \includegraphics[align=c,width=0.5\linewidth]{Bilder/Bilder_01/komp_zahl.jpg}
+    }
+    \caption{Strahl für reelle sowie komplexe Zahlen}
+    \label{fig:Komplexe Zahl}
+\end{figure}
+
+\begin{comment}
+\begin{figure}[H]
+    \centering
+    \begin{minipage}[c]{.45\textwidth}
+        \subfigure[Strahl für reele Zahlen]{
+        \includegraphics[align=c, width=.9\linewidth]{Bilder/Bilder_01/reele_achse.png}}
+    \end{minipage}
+    \begin{minipage}[t]{.45\textwidth}
+         \subfigure[Strahl für komplexe Zahlen]{
+        \includegraphics[align=c, width=1\linewidth]{Bilder/Bilder_01/komp_zahl.jpg}
+    }
+    \end{minipage}
+\end{figure}
+\end{comment}
+
+
+\begin{itemize}[topsep=2pt]
+    \item 
+    \underline{z} =a+jb, \quad j=$\sqrt{-1}$
+    \item
+    In Polarkoordinate:\par
+    z=r \cdot $e^{j\varphi}=\sqrt{a^{2}+b^{2}} \cdot e^{j\varphi}$
+    \item
+    Trigonometrische Form:\par
+    $z=\underbrace{r \cdot cos(\varphi)}_{\textcolor{blue}{a}}+j \cdot \underbrace{r \cdot sin(\varphi)}_{\textcolor{blue}{b}}=r \cdot (cos(\varphi)+j \cdot sin(\varphi))$
+    \item[]
+    \fbox{
+        \parbox{0.95\textwidth}{
+        \hl{Eulersche-Formel:}
+        \begin{center}
+             $e^{j\varphi}=cos\varphi+j \cdot sin\varphi$\par
+             $cos\varphi=\frac{1}{2} \cdot (e^{j\varphi}+e^{-j\varphi}), \quad    sin\varphi=\frac{1}{2j} \cdot (e^{j\varphi}-e^{-j\varphi})$
+        \end{center}
+        }
+    }
+    \item
+    Komplexe konjugierte Zahl:\par
+    $\underline{z}=a+jb, \quad \underline{z^{*}}=a-jb$
+    \item
+    Rechenregel von Komplexer Zahl (Selbsstudium)
+    \item
+    Umwandlung zwischen verschiedenen Darstellungsformen der komplexen Zahlen:\par
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{Bilder/Bilder_01/umwandlung_komp_zahl.png}
+        \caption{Verschiedene Darstellungen komplexer Zahlen}
+        \label{fig:Verschiedene Darstellungen komplexer Zahlen}
+    \end{figure}
+    \item[]
+    \centerline{$\underline{z}=a+jb=r \cdot e^{j\varphi}$}
+\end{itemize}
+
+
+\subsubsection{\textbf{Komplexe harmonische Funktion}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Bilder/Bilder_01/komp_harm_funk.png}
+    \caption{Komplexe harmonische Funktion}
+    \label{fig:Komplexe harmonische Funktion}
+\end{figure}
+
+\begin{equation}
+    Ae^{j\omega t}=A \cdot cos(\omega t)+jA \cdot sin(\omega t)
+\end{equation}
+
+ \fbox{
+        \parbox{0.95\textwidth}{
+        \hl{Wiederholung: Eulersche-Formel:}
+        \begin{center}
+        $e^{j\varphi}=cos\varphi+j \cdot sin\varphi$\par
+        $cos\varphi=\frac{1}{2} \cdot (e^{j\varphi}+e^{-j\varphi}), \quad sin\varphi=\frac{1}{2j} \cdot (e^{j\varphi}-e^{-j\varphi})$
+        \end{center}
+        }
+    }
+
+
+
+\subsubsection{\textbf{Überlagerung zwei Harmonischen gleicher Frequenz}}
+\begin{equation}
+    x(t)=x_{1}(t)+x_{2}(t)=A \cdot \cos(\omega_{0}t)+B \cdot \sin(\omega_{0}t)
+\end{equation}
+
+\fbox{
+     \parbox{0.95\textwidth}{
+        \hl{Additionstheorem aus Mathematik:}
+        \begin{center}
+        $sin(x+y)=sinx \cdot cosy+siny \cdot cosx$\\
+        $cos(x+y)=cosx \cdot cosy-sinx \cdot siny$\\
+        \end{center}
+      }  
+}
+
+\begin{equation}
+\begin{split}
+     x(t)=& A \cdot \cos (\omega_{0}t)+B \cdot \sin(\omega_{0}t)\\
+         =& \underbrace{\sqrt{A^{2}+B^{2}}}_{\textcolor{red}{C} }   \cdot \Bigl(\underbrace{\underbrace{\frac{A}{\sqrt{A^{2}+B^{2}}}}_{\textcolor{red}{\sin \psi} }}_{\textcolor{blue}{\cos \varphi} }   \cdot \cos(\omega_{0}t)+\underbrace{\underbrace{\frac{B}{\sqrt{A^{2}+B^{2}}}}_{\textcolor{red}{\cos\psi}}}_{\textcolor{blue}{\sin \varphi}}  \cdot \sin(\omega_{0}t )\Bigr)  \\
+         =& \textcolor{red}{C \cdot \sin(\omega_{0}+\psi)}\\
+         =& \textcolor{blue}{C \cdot \cos(\omega_{0}t+\varphi)}\\
+     \psi=&\arctan (\dfrac{A}{B})\\
+  \varphi=&\arctan (\dfrac{-B}{A})   
+\end{split}
+\end{equation}
+
+Für die Bestimmung der Winkel $\psi$ bzw. $\varphi$ im Wertbereich $0-2\pi$ benutzt man die \hl{atan2} Funktion. In MatLab $atan2(y,x)$:\: \underline{$\psi$=atan2(A,B) \quad $\varphi$=atan2(-B,A)}.
+
+\fbox{
+     \parbox{0.95\textwidth}{
+        \hl{Zusammenfassung:}\par
+        $
+        x(t)=A \cdot \cos(\omega_{0}t)+B \cdot \sin(\omega_{0}t)=C\sin(\omega_{0}+\varphi)=C \cdot \sin(\omega_{0}+\psi)\\
+       \cdot C=\sqrt{A^{2}+B^{2}}\\
+        \cos\varphi=\frac{A}{C}, \quad \sin\varphi=-\frac{B}{C}\\
+        \sin\psi=\frac{A}{C}, \quad \cos\psi=\frac{B}{C}\\
+        \varphi=atan2(-B, A), \quad \psi=atan2(A, B)
+        $\\
+        \textcolor{blue}{\hl{atan2 Funktion} liefert den Wertbereich ($-pi, pi$), Syntax in MatLab:\; atan2(y, x).}
+        }
+    }
+    
+\subsubsection{\textbf{Überlagerung zweier Harmonischen verschiedener Frequenzen}}
+
+\begin{flalign*}
+    & \  x_1=A \cdot \cos(\omega_1t)
+    & \ & x_2=B \cdot \cos(\omega_2t)
+    && \\
+    & \ \omega_1=2\pi f_1
+    & \ & \omega_2=2\pi f_2
+    && \\
+    & \ T_1=\frac{1}{f_1}
+    & \ & T_2=\frac{1}{f_2}
+\end{flalign*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Bilder/Bilder_01/Ueber_zwei_versch_Freq.png}
+    \caption{Überlagerung zweier Harmonischen verschiedener Frequenz}
+    \label{fig:Ueber_zwei_versch_Freq}
+\end{figure}
+
+\fbox{
+    \parbox{0.95\textwidth}{
+    \begin{itemize}
+        \item 
+        \hl{Wichtig:} \\
+        Die Summe von zwei Harmonischen verschiedener Frequenz ist \hl{nicht mehr harmonisch}.
+        \item
+        Die Summe zweier periodischen Funktion wird \hl{nur dann periodisch}, wenn \hl{das Frequenzverhältnis zweier Funktionen rational ist}.
+        \item[]
+        \hspace{4em}$\frac{\omega_2}{\omega_1}=\frac{f_2}{f_1}=\frac{T_1}{T_2}=\frac{m}{n}$, m, n - ganze Zahlen, teilerfremd
+        \item
+        Die Periodendauer der resultierenden Funktion {\itshape x(t)}:
+        \item[]
+        \hspace{4em}$T=kgV(T_1,T_2), \quad T=mT_2=nT_1, \quad f_0=ggT(f_1,f_2)$
+        \item
+        Wenn das Frequenzverhältnis nicht rational ist, dann ist die {\itshape x(t)} nicht periodisch.
+        \item[]
+        \hspace{4em}$\frac{T_1}{T_2}\approx \frac{m}{n}$, \quad für relativ große ganze Zahlen m,n $\rightarrow$ {\itshape x(t)} ist \hl{quasi-periodisch}. 
+    \end{itemize}
+    }
+}
+
+\textbf{Beispiel 1:}\\
+{\itshape $x(t)=5\cos(4t)+4sin(10\pi t)$}\\
+Frage: Ist {\itshape x(t)} periodisch?\\
+\textcolor{blue}{Das Frequenzverhältnis $\dfrac{\omega_2}{\omega_1}=\dfrac{10\pi}{4}$} ist \textcolor{red}{irrational $\Rightarrow$ {\itshape x(t)} ist nicht periodisch.}
+
+\textbf{Beispiel 2:}\\
+{\itshape $y(t)=5\cos(10\pi t)+7sin(30\pi t+0.5)$}\\
+Frage: Ist {\itshape y(t)} periodisch? Wenn ja, wie groß ist seine Periode?\\
+\textcolor{blue}{Das Frequenzverhältnis $\dfrac{10\pi}{30\pi}=\dfrac{1}{3}$} ist \textcolor{red}{rational $\Rightarrow$ {\itshape y(t)} ist periodisch.} \\
+$T_1=\dfrac{1}{5}, \quad T_2=\dfrac{2\pi}{\omega_2}=\dfrac{1}{15}, \quad T=kgV(T_1,T_2)=\dfrac{1}{5}$\\
+$f_1=5, \quad f_2=15, \quad f=ggT(f_1,f_2)=5$\\
+
+
+
+\subsubsection{\textbf{Spaltfunktion}}
+Nicht normierte Form:  $si(t)=\dfrac{\sin t}{t}$\\
+normierte Form:        $sinc(t)=\dfrac{\sin(\pi t)}{\pi t}$\\
+\begin{equation}
+    \mbox{Für t=0:}
+    si(0)=\lim_{t \to 0} \dfrac{\sin t}{t}=\lim_{t \to 0}  \dfrac{\cos t}{1}=1 
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Bilder/Bilder_01/si(t)_Überlagerung.png}
+    \caption{Entstehung der Spaltfunktion Si(t)}
+    \label{fig:si(t)_Überlagerung}
+\end{figure}
+
+\fbox{
+    \parbox{0.95\textwidth}{
+    \hl{Eigenschaften:}
+    \begin{itemize}
+        \item [a)]
+        $si(t)$ ist eine \uuline{gerade} Funktion. $si(t)=si(-t)$
+        \item [b)]
+        $si(0)=1$
+        \item [c)]
+        Nullstellen von $si(t)$: $\;$ $\pm \pi, \pm 2\pi, \pm 3\pi, \cdots$
+    \end{itemize}
+    }
+}
+
+
+%%% wrapfigure: Bild rechts gestellt, während Sätze andererseitig
+%%% Param: [4] vertikal 4 Zeilen, {r} Bild recht liegend, {12em} Breite
+
+\begin{comment}
+\begin{itemize}
+    \item 
+    \begin{wrapfigure}{r}{6cm}
+        \centering
+        \includegraphics[width=1\linewidth]{Bilder/Bilder_01/gerade_Funktion.png}
+        \caption{Gerade Funktion}
+        \label{fig:gerade}
+    \end{wrapfigure}
+    Eine Funktion $x(t)$ ist gerade, wenn es gilt:
+    $x(t)=x(-t)$ $\Rightarrow$ achsensymmetrisch
+    \item 
+    \begin{wrapfigure}{r}{6cm}
+        \centering
+        \includegraphics[width=1\linewidth]{Bilder/Bilder_01/ungerade_Funktion.png}
+        \caption{Ungerade Funktion}
+        \label{fig:ungerade}
+    \end{wrapfigure}
+    Eine Funktion $x(t)$ ist ungerade, wenn es gilt:
+    $x(t)=-x(-t)$ $\Rightarrow$ punktsymmetrisch
+\end{itemize}
+\end{comment}
+
+\vspace{1.5cm}
+\fbox{
+   \parbox{.95\textwidth}{
+       \begin{minipage}{.45\linewidth}
+       \hl{Definition:}
+            \begin{itemize}
+                \item Eine Funktion $x(t)$ ist gerade, wenn es gilt:$x(t)=x(-t)$ $\Rightarrow$ achsensymmetrisch
+                \item Eine Funktion $x(t)$ ist ungerade, wenn es gilt:$x(t)=-x(-t)$ $\Rightarrow$ punktsymmetrisch
+            \end{itemize}
+        \end{minipage}\vspace{0.5cm}
+        \begin{minipage}{.45\linewidth}
+            \hspace{0.6cm}
+            \includegraphics[scale=0.15]{Bilder/Bilder_01/gerade_Funktion.png}
+            %\caption{Gerade Funktion}
+            \label{fig:gerade}
+            \hspace{0.8cm}
+            \includegraphics[scale=0.15]{Bilder/Bilder_01/ungerade_Funktion.png}
+            %\caption{Ungerade Funktion}
+            \label{fig:ungerade}
+        \end{minipage}
+   }
+}
+
+
+
+
+\subsubsection{\textbf{DIRAC-Impuls}}
+
+%%% \{minipage} ist nur innerhalb eines Containers verwendbar
+\begin{figure}[H]
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \includegraphics[scale=0.2]{Bilder/Bilder_01/Dirac-Impuls.png}
+    \end{minipage}
+    \begin{minipage}{.45\linewidth}
+            \begin{equation}
+                r_\tau (t)=\left\{
+                \begin{array}{cl}
+                    \dfrac{1}{\tau}, &  \ \mbox{\itshape{für}} -\dfrac{\tau}{2}\leq t\leq \dfrac{\tau}{2} \\
+                    0,  &  \ sonst \\
+                \end{array} \right.
+                \nonumber
+            \end{equation}
+        \end{minipage}
+\end{figure}
+
+Die DIRAC-Impuls ist definiert als:\\
+\begin{equation}
+    \delta (t)=\lim_{\tau \to 0}r_\tau (t) 
+\end{equation}
+
+\fbox{
+    \hl{Definition:}\\
+    \begin{minipage}{.45\linewidth}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.5]{Bilder/Bilder_01/Dirac.png}
+            \caption{Dirac-Impuls}
+            \label{fig:dirac}
+        \end{figure}
+    \end{minipage}
+    \begin{minipage}{.45\linewidth}
+        \begin{equation}
+            \delta = \left\{
+            \begin{array}{cc}
+                 0, & \ \mbox{für} t\neq 0 \\
+                 \neq 0, & \ \mbox{für} t=0 \\
+                 \end{array} \right.
+                 \nonumber
+        \end{equation}
+    \end{minipage}
+}
+
+\vspace{0.5cm}
+\hl{Eigenschaften:}
+\begin{enumerate}
+    \item 
+    $\delta (t)$ ist eine gerade Funktion, $\delta (t)=\delta (-t)$
+    \item
+    $\int\limits_{-\infty}^{\infty} \delta(t)dt=1$
+    \item
+    \hspace{1.77cm} 
+    \begin{figure}[H]
+        \centering
+        \begin{minipage}{.45\textwidth}
+            \centering
+            \includegraphics[scale=0.6]{Bilder/Bilder_01/Eigen_delta_01.png}
+        \end{minipage}
+        \begin{minipage}{.45\textwidth}
+            \begin{equation}
+                \begin{split}
+                    x_s(t)&\approx \cdots r_{\Delta t} \cdot (t-k\Delta t) \cdot \Delta t \cdot x(k\Delta t)\cdots\\
+                    &=\sum_{k=-\infty}^{\infty} r_{\Delta t} \cdot (t-\textcolor{blue}{\underbrace{k\Delta t}_\tau}) \cdot x(\textcolor{blue}{\underbrace{k\Delta t}_\tau}) \cdot \textcolor{blue}{\underbrace{\Delta t}_{d\tau}} \\
+                    & k \cdot \Delta t \rightarrow \tau \\
+                    & \Delta t \rightarrow d\tau 
+                \end{split}
+                \nonumber
+            \end{equation}
+        \end{minipage}
+    \end{figure}
+\end{enumerate}
+
+Bei der Eigenschaft \textbf{(3)}, wenn $\Delta t$ von Null tendiert, gilt:
+\begin{equation}
+    \begin{split}
+      x(t)=&\lim_{\Delta t \to 0}x_s(t)\\
+          =&\lim_{\Delta t \to 0}\sum_{k=-\infty}^{\infty} r_{\Delta t} \cdot (t-k\Delta t) \cdot x(k\Delta t) \cdot \Delta t \\
+          =&\int\limits_{-\infty}^{\infty}\delta (t-\tau)x(\tau)d\tau  
+    \end{split}
+    \nonumber
+\end{equation}
+Daraus erhält man die Gleichung:\\
+\begin{equation}
+    \boxed{x(t)=\int\limits_{-\infty}^{\infty}x(\tau) \cdot \delta (t-\tau)d\tau}
+\end{equation}
+\\Wobei, $\delta (t-\tau)$ ist der Dirac-Impuls, der als seine Verschiebung entlang der t-Achse nach rechts um eine Stecke von t angesehen werden kann.\\
+
+Daraus ergeben sich zwei Sonderfälle der Gleichung \; (11).
+
+\begin{equation}
+    \begin{split}
+        &x(t)\delta (t)=x(0)\delta (t)\\
+        &\int\limits_{-\infty}^{\infty}x(t)\delta (t)dt=x(0)\\
+        &\int\limits_{-\infty}^{\infty}x(t)\delta (t-t_0)dt=x(t_0)
+    \end{split}
+    \nonumber
+\end{equation}
+
+
+\subsubsection{Faltungsprodukt}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.65]{Bilder/Bilder_01/Faltungsprodukt.png}
+    \caption{LTI-System}
+    \label{fig:lti}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \begin{minipage}{.45\linewidth}
+        \centering
+        \hspace{15 pt}
+        \includegraphics[scale=0.7]{Bilder/Bilder_01/LTI-system.png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}{.45\linewidth}
+            \begin{equation}
+               y(t)=T_r\{x(t)\}
+            \nonumber
+            \end{equation}
+        \end{minipage}
+\end{figure}
+
+\begin{equation}
+    \begin{split}
+    y(t)=&T_r\left \{\int\limits_{-\infty }^{\infty }x(\tau ) \cdot \delta (t-\tau )d\tau \right \} \\
+        =&\int\limits_{-\infty }^{\infty } T_r\left \{x(\tau ) \cdot \delta (t-\tau )d\tau \right \}\\
+        =&\int\limits_{-\infty }^{\infty }x(\tau ) \underbrace{T_r\ \cdot {\delta (t-\tau )\}}_{\textcolor{blue}{Impulsantwort\; h(t),\; Gewichtfunktion}} d\tau 
+\end{split}
+\end{equation}
+
+\fbox{
+    \parbox{0.95\textwidth}{
+        \hl{Faltungsprodukt:}
+        \begin{equation}
+            y(t)=\int\limits_{-\infty }^{\infty }x(\tau ) \cdot h(t-\tau )d\tau =x(t)\ast  h(t)
+        \end{equation}
+        Sonderfall:\\
+        \hspace{1.77cm} Wenn $x(t)$ und $y(t)$ \uline{kausal} sind, d.h. sie sind für t<0 Null, denn gilt:\\
+        \begin{equation}
+            y(t)=x(t)\ast  h(t)=\int\limits_{0}^{\infty }x(\tau )h(t-\tau )d\tau
+        \end{equation}
+    }
+}
+\textbf{Eigenschaften:}
+\begin{enumerate}
+    \item 
+    $x*h=h*x$
+    \item
+    $(x_1+x_2)*h=x_1*h+x_2*h$
+    \item
+    $(x*g)*h=x*(g*h)$
+    \item
+    \uuline{$x(t)*\delta(t-t_0)=x(t-t_0)$}
+\end{enumerate}
+
+\textbf{Grafische Darstellung des Faltungsvorgangs im Zeitbereich}:
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.3\textwidth}
+        \includegraphics[scale=0.3]{Bilder/Bilder_01/x0(t).png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}{.03\textwidth}
+            $\ast$
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+             \includegraphics[scale=0.3]{Bilder/Bilder_01/t0.png}
+        \nonumber
+    \end{minipage}
+    \begin{minipage}{.03\textwidth}
+            =
+    \end{minipage}
+    \begin{minipage}{.3\textwidth}
+        \includegraphics[scale=0.3]{Bilder/Bilder_01/Faltungsprodukt_graphisch.png}
+        \nonumber
+    \end{minipage}
+    \caption{Grafische Darstellung des Faltungsvorgangs}
+    \label{fig:Faltung im Zeitbereich}
+\end{figure}
+
+Grafische Methode zur Berechnung der Faltung:\\
+\begin{equation}
+    y(t)=x(t)\ast h(t)=\int_{-\infty}^{\infty}x(\tau)h(t-\tau)d\tau
+\end{equation}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{.45\textwidth}
+        \includegraphics[scale=0.5]{Bilder/Bilder_01/Faltung_grafisch.png}
+    \end{minipage}
+    \begin{minipage}{.45\textwidth}
+        \begin{enumerate}
+            \item[]
+            \textbf{Schritte:}\\
+            \item 
+            Variable $\,$ t $\rightarrow$\ $\tau$. Skizze von x(t), $\tau(t)$.
+            \item
+            achsensymmetrische Spiegelung von $h(\tau) \rightarrow h(-\tau)$
+            \item
+            Verschiebung des gespiegelten Signals $\,$ $h(\tau)$ $\,$ von eimen Wert $t_1$\\
+            $\Rightarrow$ $h(t_1-\tau)$
+            \item
+            Berechnung des Produktes der zwei Verläufe $x(\tau)h(t_1-\tau)$
+            \item
+            Bestimmung der Fläche unter dem Produkt der beiden Signalen, diese Fläche $\,$=$\,$ das Faltungsprodukt zum Zeitpunkt $t_1$.
+            \item
+            Wiederholung der Schritte \ding{194} bis \ding{196} für einen anderen t-Wert.
+        \end{enumerate}
+    \end{minipage}
+    \caption{Schritte zur Berechnung einer Faltungsoperation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.4]{Bilder/Bilder_01/Zusammenfassung des Faltungsprozesses.png}
+    \caption{Zusammenfassung des Faltungsprozesses}
+    \label{fig:Zusammenfassung Faltung}
+\end{figure}
+
+\newpage
